@@ -1,7 +1,8 @@
 {
 	"name": "rojo-ui",
 	"displayName": "Rojo UI",
-	"description": "",
+	"publisher": "muoshuu",
+	"description": "A VS Code extension designed to bring a more familiar experience to Roblox development with Rojo.",
 	"version": "0.0.1",
 	"engines": {
 		"vscode": "^1.46.0"
