@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+## [0.0.2] - 2020-06-23
+- Fix for icons not showing up
+
 ## [0.0.1] - 2020-06-20
 - Initial build. Not much functionality available until Rojo's two-way sync API is more fleshed out.
 - Properties panel. Not 100% reliable yet and no way to modify anything. Just for looks for now.

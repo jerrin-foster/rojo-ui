@@ -1,5 +1,17 @@
 # Rojo UI
-A VS Code extension designed to bring a more familiar experience to Roblox development with Rojo.
+An explorer & properties view for Rojo integrated into Visual Studio Code designed to bring a more familiar experience to Roblox development on your filesystem.
+
+### Disclaimers & Issues
+You can view all open issues [here](https://github.com/Muoshuu/rojo-ui/issues).
+
+#### This extension is currently partially incompatible with the Rojo extension for VS Code on Windows.
+You can read about the specifics [here](https://github.com/Muoshuu/rojo-ui/issues/1). I'm working on fixing this, but it might take some time. For now, the only workaround is to use the Rojo CLI instead of the Rojo extension.
+
+#### This extension is not complete.
+I'm currently waiting for Rojo's two-way ssync API to be stable before adding any additional functionality.
+
+#### This extension relies on Rojo t open files.
+As of writing, Rojo will alwayss use your default editor to open files, so make sure your default editor for `.lua` files is VS Code. You can see how to change it [here](https://devforum.roblox.com/t/rojo-ui-vsc-extension/635966/10).
 
 ### FAQ
 
@@ -8,6 +20,11 @@ A VS Code extension designed to bring a more familiar experience to Roblox devel
 
 #### Why should I use this? How does it benefit me?
 There is no real benefit to using this extension. It does not offer anything that would speed up development. As of writing, this extension is purely for aesthetics.
+
+#### When I click a script, nothing happens, or something like notepad opens. What gives?
+This extension relies on Rojo to open files. As of writing, Rojo will **always** use your default text editor to open any files. I cannot change this. Also note that any scripts inside of a `.rbxm` file cannot be opened.
+
+[Here's](https://devforum.roblox.com/t/rojo-ui-vsc-extension/635966/10) a guide on how to change your default editor.
 
 #### How do I use this extension?
 Install it from the [VS Code extension marketplace](https://marketplace.visualstudio.com/items?itemName=muoshuu.rojo-ui), then click the Rojo icon in the activity bar.

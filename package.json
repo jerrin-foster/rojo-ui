@@ -2,12 +2,12 @@
 	"name": "rojo-ui",
 	"displayName": "Rojo UI",
 	"publisher": "muoshuu",
-	"description": "A VS Code extension designed to bring a more familiar experience to Roblox development with Rojo.",
+	"description": "An explorer & properties view for Rojo integrated into Visual Studio Code designed to bring a more familiar experience to Roblox development on your filesystem.",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/muoshuu/rojo-ui.git"
 	},
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"engines": {
 		"vscode": "^1.46.0"
 	},
