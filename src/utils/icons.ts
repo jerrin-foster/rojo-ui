@@ -15,7 +15,7 @@ export default function updateIcons(context: vscode.ExtensionContext): Promise<I
         let currentVersion = context.globalState.get(CURRENT_VERSION_KEY);
 
         request(INFO_URL).then(infoBody => {
-            if (infoBody.GUID !== currentVersion || !currentIcons) {
+            if (infoBody.GUID !== currentVersion || !currentIcons || (currentIcons && !Object.values(currentIcons).length)) {
                 rbxIcons.generate(path.join(context.globalStoragePath, 'resources')).then(iconPathIndex => {
                     context.globalState.update(ICON_INDEX_KEY, iconPathIndex);
                     context.globalState.update(CURRENT_VERSION_KEY, infoBody.GUID);
