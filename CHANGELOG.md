@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+## [0.0.3] - 2020-06-24
+- Fixed random disconnects (hopefully)
+- Fixed live sync not working
+- Add extension icon
+
 ## [0.0.2] - 2020-06-23
 - Fix for icons not showing up
 
