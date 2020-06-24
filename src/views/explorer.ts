@@ -150,6 +150,22 @@ export async function handler(context: vscode.ExtensionContext, propertyProvider
             canSelectMany: true
         });
 
+        let createSession = (name: string, port: number, info: RojoSessionData): RojoSession => {
+            let session = new RojoSession(name, 'localhost', Number(port), info);
+
+            session.onUpdated(err => {
+                if (err) {
+                    commands.disconnect({ session: session });
+                    
+                    window.showWarning(`Disconnected from project ${session.name} on port ${session.port}`);
+                }
+                
+                provider.refresh();
+            });
+
+            return session;
+        };
+
         let validators: Dictionary<Fn> = {
             name: (str: string) => {
                 if (!str) {
@@ -195,7 +211,7 @@ export async function handler(context: vscode.ExtensionContext, propertyProvider
 
                     if (name) {
                         request(`http://localhost:${port}/api/rojo`).then(info => {
-                            sessions.push(new RojoSession(name, 'localhost', Number(port), info)); provider.refresh();
+                            sessions.push(createSession(name, port, info)); provider.refresh();
                         }).catch(err => {
                             console.error(err); window.showError('Couldn\'t connect to Rojo.');
                         });
@@ -250,20 +266,6 @@ export async function handler(context: vscode.ExtensionContext, propertyProvider
             'insertInstance': (item: Item) => window.showWarning(genericMessage),
             'insertFile': (item: Item) => window.showWarning(genericMessage)
         };
-
-        setInterval(async () => {
-            for (let session of sessions) {
-                try {
-                    await request({ uri: `http://localhost:${session.port}/api/rojo`, timeout: 100 });
-                } catch (err) {
-                    commands.disconnect({ session: session });
-                    
-                    window.showWarning(`Disconnected from project ${session.name} on port ${session.port}`);
-                    
-                    provider.refresh();
-                }
-            }
-        }, 1000);
 
         for (let cmdName in commands) {
             vscode.commands.registerCommand('rojo-ui.action.' + cmdName, commands[cmdName]);
