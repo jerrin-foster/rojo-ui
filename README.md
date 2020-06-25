@@ -8,10 +8,10 @@ You can view all open issues [here](https://github.com/Muoshuu/rojo-ui/issues).
 You can read about the specifics [here](https://github.com/Muoshuu/rojo-ui/issues/1). I'm working on fixing this, but it might take some time. For now, the only workaround is to use the Rojo CLI instead of the Rojo extension.
 
 #### This extension is not complete.
-I'm currently waiting for Rojo's two-way ssync API to be stable before adding any additional functionality.
+I'm currently waiting for Rojo's two-way sync API to be stable before adding any additional functionality.
 
-#### This extension relies on Rojo t open files.
-As of writing, Rojo will alwayss use your default editor to open files, so make sure your default editor for `.lua` files is VS Code. You can see how to change it [here](https://devforum.roblox.com/t/rojo-ui-vsc-extension/635966/10).
+#### This extension relies on Rojo to open files.
+As of writing, Rojo will always use your default editor to open files, so make sure your default editor for `.lua` files is Visual Studio Code. You can see how to change it [here](https://devforum.roblox.com/t/rojo-ui-vsc-extension/635966/10).
 
 ### FAQ
 
@@ -22,7 +22,7 @@ As of writing, Rojo will alwayss use your default editor to open files, so make 
 There is no real benefit to using this extension. It does not offer anything that would speed up development. As of writing, this extension is purely for aesthetics.
 
 #### When I click a script, nothing happens, or something like notepad opens. What gives?
-This extension relies on Rojo to open files. As of writing, Rojo will **always** use your default text editor to open any files. I cannot change this. Also note that any scripts inside of a `.rbxm` file cannot be opened.
+This extension relies on Rojo to open files. As of writing, Rojo will **always** use your default text editor to open any files. I cannot change this. Also, any scripts inside of a `.rbxm` file cannot be opened.
 
 [Here's](https://devforum.roblox.com/t/rojo-ui-vsc-extension/635966/10) a guide on how to change your default editor.
 
@@ -45,7 +45,7 @@ As Rojo's two-way sync API is not complete, this extension currently has very li
 - Custom class icons for those of you that want a more modern appearance.
 
 #### How do I use custom icons?
-Open the extension's configuration and set the `Icon Folder` field to the absolute path of the directory containing your icons. Note that the icons must be `.png` files and must be named exactly the same as the class. For example, `Part.png` works, but `part.png` does not.
+Open the extension's configuration and set the `Icon Folder` field to the absolute path of the directory containing your icons. Note that the icons must be `.png` files and must be named the same as the class.
 
 After doing the above, restart VS Code by either closing and re-opening the application or pressing Ctrl/⌘ + R.
 
