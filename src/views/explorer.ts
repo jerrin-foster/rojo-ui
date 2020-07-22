@@ -1,6 +1,8 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs';
+import * as req from 'request-promise';
+import * as cheerio from 'cheerio';
 
 import * as prop from './properties';
 
@@ -200,6 +202,21 @@ export async function handler(context: vscode.ExtensionContext, propertyProvider
             }
         };
 
+        let getProjectName = (body: string): Promise<string | undefined> => {
+            return new Promise((resolve, reject) => {
+                let $ = cheerio.load(body);
+                let projectName: string | undefined;
+
+                $('.stat-name').each((i, element) => {
+                    if ($(element).text() === 'Project: ') {
+                        projectName = $(element).next().text();
+                    }
+                });
+
+                resolve(projectName);
+            });
+        };
+
         let genericMessage = 'Rojo\'s two-way sync API is incomplete.';
 
         let commands: Dictionary<Fn> = {
@@ -207,15 +224,21 @@ export async function handler(context: vscode.ExtensionContext, propertyProvider
                 port = port || await window.showInputBox({ validateInput: validators.port, value: '34872', prompt: 'What port is Rojo listening on?' });
 
                 if (port) {
-                    name = name || await window.showInputBox({ validateInput: validators.name, prompt: 'What would you like to name the project?' });
+                    req(`http://localhost:${port}`).then(async body => {
+                        let projectName = await getProjectName(body);
+                        
+                        name = name || await window.showInputBox({ validateInput: validators.name, prompt: 'What would you like to name the project?', value: projectName });
 
-                    if (name) {
-                        request(`http://localhost:${port}/api/rojo`).then(info => {
-                            sessions.push(createSession(name, port, info)); provider.refresh();
-                        }).catch(err => {
-                            console.error(err); window.showError('Couldn\'t connect to Rojo.');
-                        });
-                    }
+                        if (name) {
+                            request(`http://localhost:${port}/api/rojo`).then(info => {
+                                sessions.push(createSession(name, port, info)); provider.refresh();
+                            }).catch(err => {
+                                console.error(err); window.showError('Couldn\'t connect to Rojo.');
+                            });
+                        }
+                    }).catch(err => {
+                        console.error(err); window.showError('Couldn\'t connect to Rojo.');
+                    });
                 }
             },
 
